@@ -268,12 +268,12 @@ void put_file(char buffer[], int client_fd)
 }
 
 /**
- * The main function should be able to accept a command-line argument
- * argv[0]: program name
- * argv[1]: port number
- * 
- * Read the assignment handout for more details about the server program
- * design specifications.
+ * Entry point of the server program.
+ * @param argc The number of command-line arguments.
+ * @param argv The array of command-line arguments:
+ *                  argv[0]: program name
+ *                  argv[1]: port number
+ * @return Returns 0 upon successful execution, -1 otherwise.
  */ 
 int main(int argc, char *argv[])
 {
