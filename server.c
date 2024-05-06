@@ -184,8 +184,7 @@ FILE* open_file(char buffer[], char open_mode, int client_fd, char other_error_m
     char *filename = strchr(buffer, ' ');
 
     // If the file is not found, send error message to client
-    if (filename == NULL)
-    {
+    if (filename == NULL) {
         send_message_to_client(client_fd, other_error_msg);
         return NULL; // Go back to accepting new connections
     }
@@ -197,9 +196,8 @@ FILE* open_file(char buffer[], char open_mode, int client_fd, char other_error_m
 
     // Attempt to open file
     FILE *file = fopen(filename, &open_mode);
-    if (file == NULL) {
+    if (file == NULL)
         send_message_to_client(client_fd, not_found_msg);
-    }
 
     return file; 
 }
@@ -245,8 +243,7 @@ void put_file(char buffer[], int client_fd)
     int empty_lines = 0;
 
     // Receive and write data to file until two consecutive empty lines
-    while (1)
-    {
+    while (1) {
         int bytes_received = receive_client_message(client_fd, buffer);
 
         // Check for empty lines
@@ -279,10 +276,7 @@ int main(int argc, char *argv[])
 {
     // Ensure there are 2 arguments
     if (argc != 2)
-    {
-        fprintf(stderr, "Usage: %s <port_number>\n", argv[0]);
         return -1;
-    }
 
     // Get the port number from the command-line arguments
     int port_num = get_port_num(argv);
@@ -298,20 +292,17 @@ int main(int argc, char *argv[])
     listen_for_incoming_connection(fd);
 
     // Main loop to handle client connections
-    while (1)
-    {
+    while (1) {
         int client_fd = accept_client_connection(fd);
 
         // Fork a child process
         pid_t pid = fork();
 
-        if (pid == -1) // Fork failed
-        {
+        if (pid == -1) { // Fork failed
             send_message_to_client(client_fd, "HELLO\n");
             close(client_fd);
         }
-        else if (pid == 0) // Child process
-        {
+        else if (pid == 0) { // Child process
             close(fd); // Close listening socket in child process
 
             send_message_to_client(client_fd, "HELLO\n");
@@ -330,8 +321,7 @@ int main(int argc, char *argv[])
             close(client_fd);
             exit(1);
         }
-        else // Parent process
-        {
+        else { // Parent process
             close(client_fd); // Close client socket in parent process
         }
     }
