@@ -22,3 +22,7 @@ This project is part of a networking assignment aimed at implementing a multi-cl
 4. Open another terminal window.
 5. Run `nc localhost <port_number>` in the new terminal window (replace `<port_number>` with the port number your server is using) to establish a connection with your server program.
 6. Once `nc` is connected to the server program, type commands such as GET, PUT, and BYE in the `nc` terminal window to interact with the server and transfer files.
+7. 
+## Acknowledgements
+
+These implementations were developed as part of a project for NWEN241 at Victoria University of Wellington.
